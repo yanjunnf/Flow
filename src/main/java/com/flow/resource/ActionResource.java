@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response.Status;
 
 import javax.ws.rs.core.MediaType;
 
-import com.flow.ConfigClass;
+import com.flow.config.ConfigClass;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponses;

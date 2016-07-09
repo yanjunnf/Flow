@@ -1,10 +1,7 @@
-package com.flow.action.impl;
+package com.flow.action;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
-import com.flow.action.AbstractAction;
-import com.flow.action.Action;
 
 public class CommandlineAction extends AbstractAction implements Action{
 	public String commandLine;

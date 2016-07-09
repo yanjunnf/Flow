@@ -1,16 +1,14 @@
 package com.flow.condition;
 
-public class EqualsCondition<T> implements Condition {
-	private T source;
-	private T target;
+public class EqualsCondition implements Condition {
+	private Object source;
 	
-	public EqualsCondition(T source, T target) {
+	public EqualsCondition(Object source) {
 		this.source = source;
-		this.target = target;
 	}
 	
 	@Override
-	public boolean evaluate() {
+	public boolean evaluate(Object target) {
 		return source.equals(target) ;
 	}
 }

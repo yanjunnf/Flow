@@ -1,16 +1,17 @@
 package com.flow.condition;
 
-public class GreaterThan<T> implements Condition {
-	private T source;
-	private T target;
+/*
+ * The Object should be Integer, Float, Double
+ * */
+public class GreaterThan implements Condition {
+	private Object source;
 
-	public GreaterThan(T source, T target) {
+	public GreaterThan(Object source) {
 		this.source = source;
-		this.target = target;
 	}
 	
 	@Override
-	public boolean evaluate() {
+	public boolean evaluate(Object target) {
 		if (source instanceof Integer)
 			return ConditionTools.greaterThan((Integer)source, (Integer)target);
 		else if (source instanceof Float)

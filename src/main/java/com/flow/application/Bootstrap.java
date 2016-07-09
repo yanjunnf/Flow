@@ -1,9 +1,10 @@
-package com.flow;
+package com.flow.application;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+import com.flow.config.ConfigClass;
 import com.flow.resource.ActionResource;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
 

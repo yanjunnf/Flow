@@ -1,7 +1,8 @@
-package com.flow;
+package com.flow.application;
 
 import org.glassfish.jersey.server.ResourceConfig;
 
+import com.flow.config.ConfigClass;
 import com.flow.resource.ActionResource;
 
 import org.glassfish.jersey.moxy.json.MoxyJsonConfig;

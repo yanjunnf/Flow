@@ -1,4 +1,6 @@
-package com.flow.action;
+package com.flow.step;
+
+import com.flow.action.Action;
 
 public abstract class AbstractStep {
 	private String name;
@@ -7,6 +9,10 @@ public abstract class AbstractStep {
 	public AbstractStep(String name, Action action) {
 		this.name = name;
 		this.action = action;
+	}
+	
+	protected boolean evaluate(Object result) {
+		return false;
 	}
 
 	public String getName() {
