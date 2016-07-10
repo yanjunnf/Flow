@@ -1,5 +1,5 @@
 package com.flow.action;
 
-public interface Action {	
-	public Object execute();
+public interface Action {    
+    public Object execute();
 }

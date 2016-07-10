@@ -1,5 +1,5 @@
 package com.flow.condition;
 
 public interface Condition {
-	public boolean evaluate(Object target);
+    public boolean evaluate(Object target);
 }

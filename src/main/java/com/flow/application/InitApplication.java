@@ -21,7 +21,7 @@ public class InitApplication extends ResourceConfig {
     public static boolean bInRealServer = false;
     public static String startTime = "";
 
-	public InitApplication() {
+    public InitApplication() {
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             startTime = df.format(new Date());
@@ -34,10 +34,10 @@ public class InitApplication extends ResourceConfig {
             e.printStackTrace();
         }
         
-	}
+    }
 
 
-	public static ResourceConfig createApp() {
+    public static ResourceConfig createApp() {
         return new ResourceConfig().
                 packages(ActionResource.class.getPackage().getName(),
                         "com.wordnik.swagger.jaxrs.listing").
