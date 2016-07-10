@@ -6,7 +6,7 @@ import com.flow.process.Flow;
  * The LoopStep just like JAVA while syntax.
  * If the times = -1, this step is infinite loop
  * */
-public class LoopStep extends AbstractStep implements Step{
+public class LoopStep extends AbstractStep {
     private int interval;
     private int times;
     
@@ -17,7 +17,8 @@ public class LoopStep extends AbstractStep implements Step{
     }
 
     @Override
-    public Object execute() {
+    public Object execute(Object inputData) {
+        super.execute(inputData);
         Object result = null;
         if (times == -1) {
             try {

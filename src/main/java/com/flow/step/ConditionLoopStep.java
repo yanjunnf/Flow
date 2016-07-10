@@ -12,9 +12,9 @@ public class ConditionLoopStep extends LoopStep {
         this.condition = condition;
     }
     @Override
-    public Object execute() {
+    public Object execute(Object inputData) {
         if (condition == null)
-            return super.execute();
+            return super.execute(inputData);
         else {
             int times = getTimes();
             int interval = getInterval();

@@ -1,5 +1,6 @@
 package com.flow.process;
 
+import com.flow.common.Status;
 import com.flow.step.Step;
 
 public interface Flow {
@@ -8,4 +9,6 @@ public interface Flow {
     public void stop();
     
     public void setCurrentStep(Step step);
+    
+    public Status getStatus();
 }

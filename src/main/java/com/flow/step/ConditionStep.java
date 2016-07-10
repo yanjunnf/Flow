@@ -9,7 +9,7 @@ import com.flow.process.Flow;
  * leftStep: if the condition returns true, the left step will be triggered.
  * rightStep: if the condition returns false, the right step will be triggered.
  * */
-public class ConditionStep extends AbstractStep implements Step {
+public class ConditionStep extends AbstractStep {
     private Condition condition;
     private Step leftStep;
     private Step rightStep;
@@ -29,15 +29,16 @@ public class ConditionStep extends AbstractStep implements Step {
     }
 
     @Override
-    public Object execute() {
+    public Object execute(Object inputData) {
+        super.execute(inputData);
         Object retValue = null;
         Action action = getAction();
         if (action != null) {
             Object object = action.execute();
             if (evaluate(object))
-                retValue = leftStep.execute();
+                retValue = leftStep.execute(object);
             else
-                retValue = rightStep.execute();
+                retValue = rightStep.execute(object);
         }
         return retValue;
     }

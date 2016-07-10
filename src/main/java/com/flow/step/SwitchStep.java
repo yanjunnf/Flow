@@ -10,7 +10,7 @@ import com.flow.process.Flow;
 /*
  * This step just like JAVA switch syntax, you can set multiple conditions in this step
  * */
-public class SwitchStep extends AbstractStep implements Step {
+public class SwitchStep extends AbstractStep {
     private Map<Condition, Step> stepMap;
     
     public SwitchStep(String name, Action action, Flow flow) {
@@ -27,7 +27,8 @@ public class SwitchStep extends AbstractStep implements Step {
     }
 
     @Override
-    public Object execute() {
+    public Object execute(Object inputData) {
+        super.execute(inputData);
         Action action = getAction();
         Object result = null;
         if (action != null && stepMap.size() > 0) {
@@ -36,7 +37,7 @@ public class SwitchStep extends AbstractStep implements Step {
                 if (condition.evaluate(result)) {
                     Step step = stepMap.get(condition);
                     if (step != null)
-                        result = stepMap.get(condition).execute();
+                        result = stepMap.get(condition).execute(inputData);
                     break;
                 }    
             }

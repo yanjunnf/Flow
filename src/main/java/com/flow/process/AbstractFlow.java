@@ -7,7 +7,7 @@ import com.flow.step.Step;
  * The flow just like a linked step list.
  * */
 
-public abstract class AbstractFlow {
+public abstract class AbstractFlow implements Flow {
     private String name;
     private Step start;
     private Step currentStep;
@@ -36,7 +36,6 @@ public abstract class AbstractFlow {
     }
 
     public void setStart(Step start) {
-        Status status = getStatus();
         if (status != Status.RUNNING) {
             this.start = start;
             if (start != null)
@@ -63,9 +62,7 @@ public abstract class AbstractFlow {
     }
 
     public Status getStatus() {
-        synchronized(this) {
             return status;
-        }
     }
 
     public void setStatus(Status status) {

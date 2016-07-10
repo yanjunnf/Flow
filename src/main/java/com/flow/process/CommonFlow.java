@@ -3,7 +3,7 @@ package com.flow.process;
 import com.flow.common.Status;
 import com.flow.step.Step;
 
-public class CommonFlow extends AbstractFlow implements Flow {
+public class CommonFlow extends AbstractFlow {
     public CommonFlow(String name, Step start) {
         super(name, start);
     }
@@ -15,7 +15,7 @@ public class CommonFlow extends AbstractFlow implements Flow {
             Step start = getStart();
             if (start != null) {
                 setStatus(Status.RUNNING);
-                return start.execute();
+                return start.execute(null);
             }
         }
 
