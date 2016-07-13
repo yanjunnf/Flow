@@ -13,6 +13,7 @@ public class ConditionLoopStep extends LoopStep {
     }
     @Override
     public Object execute(Object inputData) {
+        super.execute(inputData);
         if (condition == null)
             return super.execute(inputData);
         else {
