@@ -2,8 +2,7 @@ package com.flow.step;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.flow.action.Action;
+import com.flow.common.Status;
 import com.flow.condition.Condition;
 import com.flow.process.Flow;
 
@@ -13,8 +12,8 @@ import com.flow.process.Flow;
 public class SwitchStep extends AbstractStep {
     private Map<Condition, Step> stepMap;
     
-    public SwitchStep(String name, Action action, Flow flow) {
-        super(name, action, flow);
+    public SwitchStep(String name, Flow flow) {
+        super(name, flow);
         stepMap = new HashMap<Condition, Step>();
     }
     
@@ -28,11 +27,12 @@ public class SwitchStep extends AbstractStep {
 
     @Override
     public Object execute(Object inputData) {
-        super.execute(inputData);
-        Action action = getAction();
+        if (getStatus() == Status.READY)
+            return null;
+
         Object result = null;
-        if (action != null && stepMap.size() > 0) {
-            result = action.execute();
+        result = super.execute(inputData);
+        if (stepMap.size() > 0) {
             for (Condition condition : stepMap.keySet()) {
                 if (condition.evaluate(result)) {
                     Step step = stepMap.get(condition);
@@ -47,6 +47,10 @@ public class SwitchStep extends AbstractStep {
     }
 
     @Override
-    public void stop() {        
+    public void stop() {
+        this.setStatus(Status.STOPPED);
+        for (Step step: stepMap.values()) {
+            step.stop();
+        }
     }
 }

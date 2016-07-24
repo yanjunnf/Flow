@@ -2,7 +2,7 @@ package com.flow.step;
 
 import org.apache.log4j.Logger;
 
-import com.flow.action.Action;
+import com.flow.common.Status;
 import com.flow.condition.Condition;
 import com.flow.process.Flow;
 
@@ -18,8 +18,8 @@ public class ConditionStep extends AbstractStep {
     private Step rightStep;
     private static Logger logger = Logger.getLogger(ConditionStep.class);
     
-    public ConditionStep(String name, Action action, Flow flow, Condition condition, Step leftStep, Step rightStep) {
-        super(name, action, flow);
+    public ConditionStep(String  name, Flow flow, Condition condition, Step leftStep, Step rightStep) {
+        super(name, flow);
         this.condition = condition;
         this.leftStep = leftStep;
         this.rightStep = rightStep;
@@ -35,18 +35,20 @@ public class ConditionStep extends AbstractStep {
 
     @Override
     public Object execute(Object inputData) {
-        super.execute(inputData);
+        if (getStatus() != Status.READY)
+            return null;
+        
         Object retValue = null;
-        Action action = getAction();
-        if (action != null) {
-            Object object = action.execute();
-            if (evaluate(object)) {
+        if (evaluate(inputData)) {
+            if (getStatus() == Status.READY) {
                 logger.debug("Evaluated the result successfully. Go to left step");
-                retValue = leftStep.execute(object);
+                retValue = leftStep.execute(inputData);
             }
-            else {
+        }
+        else {
+            if (getStatus() == Status.READY) {
                 logger.debug("Failed to evaluate the result. Go to right step");
-                retValue = rightStep.execute(object);
+                retValue = rightStep.execute(inputData);
             }
         }
         return retValue;
@@ -75,8 +77,11 @@ public class ConditionStep extends AbstractStep {
     public void setRightStep(Step rightStep) {
         this.rightStep = rightStep;
     }
-
+    
     @Override
-    public void stop() {        
+    public void stop() {
+        super.stop();
+        leftStep.stop();
+        rightStep.stop();
     }
 }

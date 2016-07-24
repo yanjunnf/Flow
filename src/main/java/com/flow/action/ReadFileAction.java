@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 import org.apache.log4j.Logger;
 
-public class ReadFileAction extends AbstractAction implements Action {
+public class ReadFileAction extends AbstractAction {
     private String fileName;
     private String charset;
     private Logger logger = Logger.getLogger(ReadFileAction.class);
@@ -97,6 +97,10 @@ public class ReadFileAction extends AbstractAction implements Action {
         }
         
         return builder.toString();
+    }
+
+    @Override
+    public void stop() {        
     }
 
 }

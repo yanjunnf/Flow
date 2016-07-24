@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 
-public class CreateFileAction extends AbstractAction implements Action {
+public class CreateFileAction extends AbstractAction {
     private String fileName;
     private boolean overwrite;
     private Logger logger = Logger.getLogger(CreateFileAction.class);

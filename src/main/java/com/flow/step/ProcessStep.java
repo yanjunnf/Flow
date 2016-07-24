@@ -7,7 +7,7 @@ import com.flow.process.Flow;
 /*
  * ProcessStep is a step, it is responsible for a single process, no any conditions 
  * */
-public class ProcessStep extends AbstractStep {
+public class ProcessStep extends ActionStep {
     private Step nextStep;
     
     public ProcessStep(String name, Action action, Flow flow, Step nextStep) {
@@ -17,17 +17,17 @@ public class ProcessStep extends AbstractStep {
 
     @Override
     public Object execute(Object inputData) {
-        super.execute(inputData);
+        if (getStatus() != Status.READY)
+            return null;
+        
         Object retValue = null;
-        Status status = getStatus();
-        if (status == Status.READY) {
-            Action action = getAction();
-            if (action != null) {
-                setStatus(Status.RUNNING);
-                Object result = action.execute();
-                if (nextStep != null && getStatus() == Status.RUNNING)
-                    retValue = nextStep.execute(result);
-            }
+        retValue = super.execute(inputData);
+        Action action = getAction();
+        if (action != null) {
+            setStatus(Status.RUNNING);
+            Object result = action.execute();
+            if (nextStep != null && getStatus() == Status.RUNNING)
+                retValue = nextStep.execute(result);
         }
         
         return retValue;
@@ -36,5 +36,6 @@ public class ProcessStep extends AbstractStep {
     @Override
     public void stop() {
         setStatus(Status.STOPPED);
+        nextStep.stop();
     }
 }

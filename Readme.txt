@@ -19,9 +19,13 @@
 上述action，需要定义好输出是什么？
 
 步骤(Step)的核心步骤：
-    1. 校验输入
-    2. 执行Action
-    3. 传递结果给下一个Step
+    分为了两种：
+        1. Action step
+            . 执行Action
+            . 传递结果给下一个Step
+        2. Conditon step
+            .校验输入
+            .根据条件选择下一个step
     
 封装(Wrapper)的核心步骤：
     1. 主要是针对JSON和HTML的操作

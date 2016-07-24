@@ -7,7 +7,7 @@ import com.flow.process.Flow;
  * */
 public class EndStep extends AbstractStep {
     public EndStep(String name, Flow flow) {
-        super(name, null, flow);
+        super(name, flow);
     }
 
     @Override

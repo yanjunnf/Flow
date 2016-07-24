@@ -3,7 +3,7 @@ package com.flow.action;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class CommandlineAction extends AbstractAction implements Action{
+public class CommandlineAction extends AbstractAction {
     private String commandLine;
     private String charset;
     

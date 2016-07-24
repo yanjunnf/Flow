@@ -24,15 +24,8 @@ public class CommonFlow extends AbstractFlow {
 
     @Override
     public void stop() {
-        Status status = getStatus();
-        if (status == Status.RUNNING) {
-            Step currentStep = getCurrentStep();
-            if (currentStep != null) {
-                currentStep.stop();
-                setStatus(Status.STOPPED);
-                currentStep = null;
-            }
-        }
+        Step step = this.getStart();
+        step.stop();
     }
 }
  

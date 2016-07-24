@@ -1,6 +1,6 @@
 package com.flow.step;
 
-import com.flow.action.Action;
+import org.apache.log4j.Logger;
 import com.flow.common.Status;
 import com.flow.process.Flow;
 
@@ -15,19 +15,15 @@ import com.flow.process.Flow;
  * */
 public abstract class AbstractStep implements Step {
     private String name;
-    private Action action;
     private Flow flow;
     private Status status;
     private Object inputData;
+    protected Logger logger = Logger.getLogger(AbstractStep.class);
     
-    public AbstractStep(String name, Action action, Flow flow) {
+    public AbstractStep(String name, Flow flow) {
         this.name = name;
-        this.action = action;
         this.flow = flow;
-        if (action != null)
-            status = Status.READY;
-        else
-            status = Status.INITIALIZED;
+        status = Status.READY;
         inputData = null;
     }
     
@@ -52,20 +48,7 @@ public abstract class AbstractStep implements Step {
         this.name = name;
     }
 
-    public Action getAction() {
-        return action;
-    }
 
-    public void setAction(Action action) {
-        Status status = getStatus();
-        if (status != Status.RUNNING) {
-            this.action = action;
-            if (action != null)
-                setStatus(Status.READY);
-            else
-                setStatus(Status.INITIALIZED);
-        }
-    }
 
     public Flow getFlow() {
         return flow;
@@ -93,5 +76,11 @@ public abstract class AbstractStep implements Step {
 
     public void setInputData(Object inputData) {
         this.inputData = inputData;
+    }
+    
+    @Override
+    public void stop() {
+        logger.info("This step stopped.");
+        setStatus(Status.STOPPED);
     }
 }

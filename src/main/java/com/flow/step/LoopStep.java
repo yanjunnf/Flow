@@ -1,12 +1,13 @@
 package com.flow.step;
 
 import com.flow.action.Action;
+import com.flow.common.Status;
 import com.flow.process.Flow;
 /*
  * The LoopStep just like JAVA while syntax.
  * If the times = -1, this step is infinite loop
  * */
-public class LoopStep extends AbstractStep {
+public class LoopStep extends ActionStep {
     private int interval;
     private int times;
     
@@ -18,11 +19,14 @@ public class LoopStep extends AbstractStep {
 
     @Override
     public Object execute(Object inputData) {
-        super.execute(inputData);
+        if (getStatus() != Status.READY)
+            return null;;
+
         Object result = null;
+        result = super.execute(inputData);
         if (times == -1) {
             try {
-                while (true) {
+                while (getStatus() == Status.READY) {
                     result = getAction().execute();
                     Thread.sleep(interval);
                 }
@@ -31,7 +35,7 @@ public class LoopStep extends AbstractStep {
             }
         } else if (times > 0){
             try {
-                while (times-- > 0) {
+                while (times-- > 0 && getStatus() == Status.READY) {
                     result = getAction().execute();
                     Thread.sleep(interval);
                 }
@@ -57,9 +61,4 @@ public class LoopStep extends AbstractStep {
     public void setTimes(int times) {
         this.times = times;
     }
-
-    @Override
-    public void stop() {
-    }
-
 }

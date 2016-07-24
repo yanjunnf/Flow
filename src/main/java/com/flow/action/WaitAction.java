@@ -1,6 +1,6 @@
 package com.flow.action;
 
-public class WaitAction extends AbstractAction implements Action{
+public class WaitAction extends AbstractAction{
     private int sleep;
     
     public WaitAction(String name, boolean asyncAction, int sleep) {

@@ -1,6 +1,6 @@
 package com.flow.action;
 
-public abstract class AbstractAction {
+public abstract class AbstractAction implements Action{
     private String name;
     private boolean asyncAction;
     
@@ -9,6 +9,7 @@ public abstract class AbstractAction {
         this.asyncAction = asyncAction;
     }
     
+    @Override
     public String getName() {
         return name;
     }
@@ -23,5 +24,8 @@ public abstract class AbstractAction {
 
     public void setAsyncAction(boolean asyncAction) {
         this.asyncAction = asyncAction;
+    }
+    
+    public void stop() {
     }
 }
