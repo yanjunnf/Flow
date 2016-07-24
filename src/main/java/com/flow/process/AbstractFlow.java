@@ -23,6 +23,7 @@ public abstract class AbstractFlow implements Flow {
             status = Status.READY;
     }
 
+    @Override
     public String getName() {
         return name;
     }

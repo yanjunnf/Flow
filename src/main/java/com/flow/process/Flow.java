@@ -11,4 +11,6 @@ public interface Flow {
     public void setCurrentStep(Step step);
     
     public Status getStatus();
+    
+    public String getName();
 }

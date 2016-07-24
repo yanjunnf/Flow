@@ -5,6 +5,12 @@ import com.flow.common.Status;
 import com.flow.process.Flow;
 
 /*
+ * Step has 4 status:
+ * INITIALIZED:
+ * READY:
+ * RUNNING:
+ * STOPPING:
+ * STOPPED:
  * inputData: the data from the parent step
  * */
 public abstract class AbstractStep implements Step {
