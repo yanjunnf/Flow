@@ -1,6 +1,6 @@
 package com.flow.step;
 
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 
 /*
  * The end step will do nothing.

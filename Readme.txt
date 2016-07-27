@@ -15,6 +15,8 @@
     . 解析文本action，比如正则取出文本某些内容
     . 运行一个进程
     . gSOAP调用
+    . 处理JSON对象action
+    . 处理XML对象action
     
 上述action，需要定义好输出是什么？
 
@@ -26,6 +28,13 @@
         2. Conditon step
             .校验输入
             .根据条件选择下一个step
+        3. Loop step
+            . 循环step
+            . 设定循环次数和时间间隔
+        4. Condition loop step
+            . 条件循环step
+            . 设定循环次数和时间间隔
+            . 循环中每次校验action执行结果
     
 封装(Wrapper)的核心步骤：
     1. 主要是针对JSON和HTML的操作

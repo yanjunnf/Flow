@@ -8,7 +8,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.flow.common.Status;
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 
 public class FlowManager implements Manager {
     private Map<String, Flow> flowMap;
@@ -73,6 +73,15 @@ public class FlowManager implements Manager {
 
     @Override
     public boolean stop(String name) {
+    	Flow flow = null;
+    	synchronized(flowMap) {
+    		flow = flowMap.get(name);
+    	}
+		
+    	if (flow != null) {
+			flow.stop();
+		}
+    	
         return false;
     }
 

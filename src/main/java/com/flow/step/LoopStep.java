@@ -2,7 +2,7 @@ package com.flow.step;
 
 import com.flow.action.Action;
 import com.flow.common.Status;
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 /*
  * The LoopStep just like JAVA while syntax.
  * If the times = -1, this step is infinite loop
@@ -10,17 +10,21 @@ import com.flow.process.Flow;
 public class LoopStep extends ActionStep {
     private int interval;
     private int times;
+    private Step nextStep;
     
-    public LoopStep(String name, Action action, Flow flow, int interval, int times) {
+    public LoopStep(String name, Action action, Flow flow, Step nextStep, int interval, int times) {
         super(name, action, flow);
         this.interval = interval;
         this.times = times;
+        this.nextStep = nextStep;
     }
 
     @Override
     public Object execute(Object inputData) {
-        if (getStatus() != Status.READY)
-            return null;;
+        if (getStatus() != Status.READY) {
+        	logger.warn("The action status is not READY. Status = " + getStatus());
+            return null;
+        }
 
         Object result = null;
         result = super.execute(inputData);
@@ -33,7 +37,7 @@ public class LoopStep extends ActionStep {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (times > 0){
+        } else if (times > 0) {
             try {
                 while (times-- > 0 && getStatus() == Status.READY) {
                     result = getAction().execute();
@@ -43,6 +47,9 @@ public class LoopStep extends ActionStep {
                 e.printStackTrace();
             }
         }
+        if (nextStep != null)
+        	result = nextStep.execute(inputData);
+        
         return result;
     }
 

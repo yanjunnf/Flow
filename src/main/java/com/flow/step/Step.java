@@ -6,4 +6,6 @@ public interface Step {
     public Object execute(Object inputData);
     
     public void stop();
+    
+    public void reset();
 }

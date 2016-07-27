@@ -98,9 +98,4 @@ public class ReadFileAction extends AbstractAction {
         
         return builder.toString();
     }
-
-    @Override
-    public void stop() {        
-    }
-
 }

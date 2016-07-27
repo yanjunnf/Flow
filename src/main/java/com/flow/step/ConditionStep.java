@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.flow.common.Status;
 import com.flow.condition.Condition;
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 
 /*
  * The ConditionStep just like JAVA if-else syntax.

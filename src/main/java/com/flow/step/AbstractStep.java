@@ -2,7 +2,7 @@ package com.flow.step;
 
 import org.apache.log4j.Logger;
 import com.flow.common.Status;
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 
 /*
  * Step has 4 status:
@@ -82,5 +82,10 @@ public abstract class AbstractStep implements Step {
     public void stop() {
         logger.info("This step stopped.");
         setStatus(Status.STOPPED);
+    }
+    
+    @Override
+    public void reset() {
+    	status = Status.READY;
     }
 }

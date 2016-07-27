@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.flow.common.Status;
 import com.flow.condition.Condition;
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 
 /*
  * This step just like JAVA switch syntax, you can set multiple conditions in this step

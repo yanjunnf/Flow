@@ -2,15 +2,15 @@ package com.flow.step;
 
 import com.flow.action.Action;
 import com.flow.common.Status;
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 
 /*
  * ProcessStep is a step, it is responsible for a single process, no any conditions 
  * */
 public class ProcessStep extends ActionStep {
     private Step nextStep;
-    
-    public ProcessStep(String name, Action action, Flow flow, Step nextStep) {
+
+	public ProcessStep(String name, Action action, Flow flow, Step nextStep) {
         super(name, action, flow);
         this.nextStep = nextStep;
     }
@@ -38,4 +38,12 @@ public class ProcessStep extends ActionStep {
         setStatus(Status.STOPPED);
         nextStep.stop();
     }
+    
+    public Step getNextStep() {
+		return nextStep;
+	}
+
+	public void setNextStep(Step nextStep) {
+		this.nextStep = nextStep;
+	}
 }

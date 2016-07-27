@@ -1,4 +1,6 @@
-package com.flow.process;
+package com.flow.recipe;
+
+import org.apache.log4j.Logger;
 
 import com.flow.common.Status;
 import com.flow.step.Step;
@@ -12,6 +14,7 @@ public abstract class AbstractFlow implements Flow {
     private Step start;
     private Step currentStep;
     private Status status;
+    protected Logger logger = Logger.getLogger(AbstractFlow.class);
     
     public AbstractFlow(String name, Step start) {
         this.name = name;
@@ -70,5 +73,10 @@ public abstract class AbstractFlow implements Flow {
         synchronized(this) {
             this.status = status;
         }
+    }
+    
+    @Override
+    public Object restart() {
+    	return null;
     }
 }

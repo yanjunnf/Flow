@@ -3,13 +3,13 @@ package com.flow.step;
 import com.flow.action.Action;
 import com.flow.common.Status;
 import com.flow.condition.Condition;
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 
 public class ConditionLoopStep extends LoopStep {
     private Condition condition;
     
-    public ConditionLoopStep(String name, Action action, Flow flow, int interval, int times, Condition condition) {
-        super(name, action, flow, interval, times);
+    public ConditionLoopStep(String name, Action action, Flow flow, Step nextStep, int interval, int times, Condition condition) {
+        super(name, action, flow, nextStep, interval, times);
         this.condition = condition;
     }
     
@@ -17,11 +17,14 @@ public class ConditionLoopStep extends LoopStep {
     public Object execute(Object inputData) {
         if (getStatus() != Status.READY)
             return null;
-        Object result = null;
-        if (condition == null)
-            return super.execute(inputData);
         
-        result = super.execute(inputData);
+        setInputData(inputData);
+        if (condition == null) {
+        	logger.warn("The condition is empty");
+            return super.execute(inputData);
+        }
+        
+        Object result = null;
         int times = getTimes();
         int interval = getInterval();
         if (times == -1) {

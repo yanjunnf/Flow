@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import com.flow.action.Action;
 import com.flow.action.CommandlineAction;
-import com.flow.process.CommonFlow;
+import com.flow.recipe.CommonFlow;
 import com.flow.step.ProcessStep;
 
 public class CommonFlowTest {

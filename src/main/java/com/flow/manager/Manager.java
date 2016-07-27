@@ -3,7 +3,7 @@ package com.flow.manager;
 import java.util.List;
 
 import com.flow.common.Status;
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 
 public interface Manager {
     public boolean start(String name);

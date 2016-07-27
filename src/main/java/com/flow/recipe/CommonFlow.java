@@ -1,4 +1,4 @@
-package com.flow.process;
+package com.flow.recipe;
 
 import com.flow.common.Status;
 import com.flow.step.Step;
@@ -26,6 +26,18 @@ public class CommonFlow extends AbstractFlow {
     public void stop() {
         Step step = this.getStart();
         step.stop();
+    }
+    
+    @Override
+    public Object restart() {
+    	Step start = getStart();
+    	if (start != null) {
+    		start.stop();
+    		logger.info("Flow stopped.");
+    	}
+    	start.reset();
+    	logger.info("Flow is executing...");
+    	return start.execute(null);
     }
 }
  

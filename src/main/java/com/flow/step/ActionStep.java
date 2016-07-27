@@ -2,7 +2,7 @@ package com.flow.step;
 
 import com.flow.action.Action;
 import com.flow.common.Status;
-import com.flow.process.Flow;
+import com.flow.recipe.Flow;
 
 public abstract class ActionStep extends AbstractStep {
     private Action action;
