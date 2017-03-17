@@ -4,15 +4,21 @@ import com.flow.common.Status;
 import com.flow.step.Step;
 
 public interface Flow {
-    public Object start();
+	public Object initialize();
+	
+    public void start();
     
-    public Object restart();
+    public boolean restart();
     
     public void stop();
     
-    public void setCurrentStep(Step step);
+    public Step getCurrentStep();
+    
+    public void setStatus(Status status);
     
     public Status getStatus();
+    
+    public void setName(String name);
     
     public String getName();
 }

@@ -52,6 +52,11 @@ public class LoopStep extends ActionStep {
         
         return result;
     }
+    
+    @Override
+    public void finish() {
+    	//Nothing to do
+    }
 
     public int getInterval() {
         return interval;

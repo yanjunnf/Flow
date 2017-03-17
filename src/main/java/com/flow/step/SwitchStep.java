@@ -53,4 +53,9 @@ public class SwitchStep extends AbstractStep {
             step.stop();
         }
     }
+    
+    @Override
+    public void finish() {
+    	//Nothing to do
+    }
 }

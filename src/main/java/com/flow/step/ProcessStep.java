@@ -42,6 +42,11 @@ public class ProcessStep extends ActionStep {
     public Step getNextStep() {
 		return nextStep;
 	}
+    
+    @Override
+    public void finish(){
+    	//Nothing to do
+    }
 
 	public void setNextStep(Step nextStep) {
 		this.nextStep = nextStep;

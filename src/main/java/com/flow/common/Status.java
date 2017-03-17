@@ -5,5 +5,6 @@ public enum Status {
     READY,
     RUNNING,
     STOPPING,
-    STOPPED
+    STOPPED,
+    UNKNOWN
 }

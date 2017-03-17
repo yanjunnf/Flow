@@ -11,6 +11,4 @@ public class ContainCondition implements Condition{
     public boolean evaluate(Object target) {
         return source.contains((String)target);
     }
-    
-    
 }

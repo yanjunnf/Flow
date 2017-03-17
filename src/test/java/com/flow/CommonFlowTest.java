@@ -16,7 +16,7 @@ public class CommonFlowTest {
         ProcessStep step1 = new ProcessStep("Step1", action1, flow, null);
         ProcessStep step2 = new ProcessStep("Step2", action2, flow, step1);
         
-        flow.setStart(step2);
+        flow.setRoot(step2);
         
         flow.start();
     }

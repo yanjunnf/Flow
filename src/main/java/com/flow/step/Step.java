@@ -7,5 +7,11 @@ public interface Step {
     
     public void stop();
     
+    /*
+     * This method is used to clean resource.
+     * It is nothing to do by default.
+     * */
+    public void finish();
+    
     public void reset();
 }

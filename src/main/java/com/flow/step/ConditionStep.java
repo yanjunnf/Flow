@@ -84,4 +84,9 @@ public class ConditionStep extends AbstractStep {
         leftStep.stop();
         rightStep.stop();
     }
+    
+    @Override
+    public void finish() {
+    	//Nothing to do
+    }
 }

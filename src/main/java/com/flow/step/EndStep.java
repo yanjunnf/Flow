@@ -18,4 +18,9 @@ public class EndStep extends AbstractStep {
     @Override
     public void stop() {
     }
+    
+    @Override
+    public void finish() {
+    	//Nothing to do
+    }
 }
