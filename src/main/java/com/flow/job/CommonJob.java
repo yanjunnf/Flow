@@ -2,8 +2,6 @@ package com.flow.job;
 
 import java.util.UUID;
 
-import org.joda.time.DateTime;
-
 import com.flow.common.Status;
 import com.flow.recipe.Flow;
 
@@ -22,7 +20,7 @@ public class CommonJob implements Job {
 	
 	private void inititalize() {
 		id = UUID.randomUUID();
-		timestamp = DateTime.now().getMillis();
+		timestamp = System.currentTimeMillis();
 		status = Status.READY;
 	}
 	
