@@ -47,6 +47,7 @@ public class CommonJob implements Job {
 		return status;
 	}
 
+	@Override
 	public UUID getId() {
 		return id;
 	}
@@ -65,12 +66,12 @@ public class CommonJob implements Job {
 		return Status.UNKNOWN;
 	}
 
-	public JobConfig getJobConfig() {
-		return jobConfig;
-	}
-
 	public void setJobConfig(JobConfig jobConfig) {
 		this.jobConfig = jobConfig;
 	}
 
+    @Override
+    public JobConfig config() {
+        return jobConfig;
+    }
 }

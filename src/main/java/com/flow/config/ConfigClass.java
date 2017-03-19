@@ -16,6 +16,9 @@ public class ConfigClass {
     //Unit: second
     public static int interval = 1;
     
+    public static int fixThreadPoolSize = 100;
+    public static int scheduledThreadPoolSize = 50;
+    
     public final static String contentType = MediaType.APPLICATION_JSON + "; charset=utf-8";
     public final static int UNKNOWN_ERROR = 9999;
 }
