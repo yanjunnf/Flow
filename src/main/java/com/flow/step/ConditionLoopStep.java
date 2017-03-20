@@ -1,7 +1,6 @@
 package com.flow.step;
 
 import com.flow.action.Action;
-import com.flow.common.Status;
 import com.flow.condition.Condition;
 import com.flow.recipe.Flow;
 
@@ -14,13 +13,10 @@ public class ConditionLoopStep extends LoopStep {
     }
     
     @Override
-    public Object execute(Object inputData) {
-        if (getStatus() != Status.READY)
-            return null;
-        
+    public Object execute(Object inputData) throws Exception {
         setInputData(inputData);
         if (condition == null) {
-        	logger.warn("The condition is empty");
+        	logger.warning("The condition is empty");
             return super.execute(inputData);
         }
         
@@ -29,7 +25,7 @@ public class ConditionLoopStep extends LoopStep {
         int interval = getInterval();
         if (times == -1) {
             try {
-                while (getStatus() == Status.READY) {
+                while (true) {
                     result = getAction().execute();
                     if (!condition.evaluate(result))
                         break;
@@ -40,7 +36,7 @@ public class ConditionLoopStep extends LoopStep {
             }
         } else if (times > 0) {
             try {
-                while (times-- > 0 && getStatus() == Status.READY) {
+                while (times-- > 0) {
                     result = getAction().execute();
                     if (!condition.evaluate(result))
                         break;

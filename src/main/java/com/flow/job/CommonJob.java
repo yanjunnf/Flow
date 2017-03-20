@@ -26,18 +26,20 @@ public class CommonJob implements Job {
 	
 	@Override
 	public void start() {
-		if (flow != null && status == Status.READY) {
+		if (flow != null && (status == Status.READY || status == Status.COMPLETED)) {
 			status = Status.RUNNING;
 			flow.start();
+			status = Status.COMPLETED;
 		}
 	}
 
 	@Override
-	public void stop() {
+	public void interrupt() {
 		if (flow != null && status == Status.RUNNING) {
 			if (flow.getStatus() == Status.RUNNING) {
-				flow.stop();
-				status = Status.STOPPED;
+				status = Status.INTERRUPTING;
+				flow.interrupt();
+				status = Status.INTERRUPTED;
 			}
 		}
 	}
@@ -48,7 +50,7 @@ public class CommonJob implements Job {
 	}
 
 	@Override
-	public UUID getId() {
+	public UUID id() {
 		return id;
 	}
 

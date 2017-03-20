@@ -16,7 +16,7 @@ public class EndStep extends AbstractStep {
     }
 
     @Override
-    public void stop() {
+    public void interrupt() {
     }
     
     @Override

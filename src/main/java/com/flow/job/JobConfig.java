@@ -2,11 +2,11 @@ package com.flow.job;
 
 public class JobConfig {
     private long delay = 0;
-    private long interval = 0;
+    private long period = 0;
     
-    public JobConfig (int delay, int interval) {
+    public JobConfig (int delay, int period) {
         this.delay = delay;
-        this.interval = interval;
+        this.period = period;
     }
 
     public long getDelay() {
@@ -17,11 +17,11 @@ public class JobConfig {
         this.delay = delay;
     }
 
-    public long getInterval() {
-        return interval;
+    public long getPeriod() {
+        return period;
     }
 
-    public void setInterval(long interval) {
-        this.interval = interval;
+    public void setPeriod(long period) {
+        this.period = period;
     }
 }

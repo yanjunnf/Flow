@@ -3,9 +3,9 @@ package com.flow.step;
  * One step may contain one or more actions.
  * */
 public interface Step {        
-    public Object execute(Object inputData);
+    public Object execute(Object inputData) throws Exception;
     
-    public void stop();
+    public void interrupt();
     
     /*
      * This method is used to clean resource.

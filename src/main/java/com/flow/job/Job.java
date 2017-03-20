@@ -5,11 +5,11 @@ import java.util.UUID;
 import com.flow.common.Status;
 
 public interface Job {
-    public UUID getId();
+    public UUID id();
     
 	public void start();
 	
-	public void stop();
+	public void interrupt();
 	
 	public Status status();
 	

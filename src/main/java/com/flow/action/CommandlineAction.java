@@ -2,10 +2,14 @@ package com.flow.action;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.logging.Logger;
+
+import com.flow.job.JobManager;
 
 public class CommandlineAction extends AbstractAction {
     private String commandLine;
     private String charset;
+    private Logger logger = Logger.getLogger(JobManager.class.toString());
     
     public CommandlineAction(String name, String commandLine, boolean asyncAction) {
         super(name, asyncAction);
@@ -20,7 +24,7 @@ public class CommandlineAction extends AbstractAction {
     }
 
     @Override
-    public Object execute() {
+    public Object execute() throws Exception {
         String response = null;
         if (commandLine != null && !commandLine.isEmpty()) {
             BufferedReader br = null;
@@ -36,7 +40,8 @@ public class CommandlineAction extends AbstractAction {
                 br = null;
                 response = sb.toString();
             } catch (Exception e) {
-                e.printStackTrace();
+            	logger.severe("Failed to execute action. Message =" + e.getMessage());
+                throw e;
             } finally {
                 if (br != null) {
                     try {

@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 import com.flow.common.Status;
 import com.flow.recipe.Flow;
 
 public class FlowManager implements Manager {
     private Map<String, Flow> flowMap;
-    private Logger logger = Logger.getLogger(FlowManager.class);
+    private Logger logger = Logger.getLogger(FlowManager.class.toString());
     
     public FlowManager() {
         flowMap = new HashMap<String, Flow>();
@@ -27,7 +26,7 @@ public class FlowManager implements Manager {
             } 
         }
         if (!result)
-            logger.error("The flow has already existed. Flow name =" + flow.getName());
+            logger.severe("The flow has already existed. Flow name =" + flow.getName());
         
         return result;
     }
@@ -60,26 +59,26 @@ public class FlowManager implements Manager {
         synchronized(flowMap) {
             Flow flow = flowMap.get(name);
             if (flow != null) {
-                flow.stop();
+                flow.interrupt();
                 flowMap.remove(name);
             }
         }
         
         if (!result)
-            logger.error("Cannot find the flow. Name = " + name);
+            logger.severe("Cannot find the flow. Name = " + name);
         
         return result;
     }
 
     @Override
-    public boolean stop(String name) {
+    public boolean interrupt(String name) {
     	Flow flow = null;
     	synchronized(flowMap) {
     		flow = flowMap.get(name);
     	}
 		
     	if (flow != null) {
-			flow.stop();
+			flow.interrupt();
 		}
     	
         return false;

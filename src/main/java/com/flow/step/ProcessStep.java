@@ -1,7 +1,6 @@
 package com.flow.step;
 
 import com.flow.action.Action;
-import com.flow.common.Status;
 import com.flow.recipe.Flow;
 
 /*
@@ -16,27 +15,26 @@ public class ProcessStep extends ActionStep {
     }
 
     @Override
-    public Object execute(Object inputData) {
-        if (getStatus() != Status.READY)
-            return null;
-        
+    public Object execute(Object inputData) throws Exception {
         Object retValue = null;
         retValue = super.execute(inputData);
         Action action = getAction();
         if (action != null) {
-            setStatus(Status.RUNNING);
-            Object result = action.execute();
-            if (nextStep != null && getStatus() == Status.RUNNING)
-                retValue = nextStep.execute(result);
+            try {
+            	Object result = action.execute();
+                if (nextStep != null)
+                    retValue = nextStep.execute(result);
+            } catch (Exception e) {
+				throw e;
+            }
         }
         
         return retValue;
     }
 
     @Override
-    public void stop() {
-        setStatus(Status.STOPPED);
-        nextStep.stop();
+    public void interrupt() {
+        nextStep.interrupt();
     }
     
     public Step getNextStep() {

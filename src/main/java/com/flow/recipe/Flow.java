@@ -10,7 +10,7 @@ public interface Flow {
     
     public boolean restart();
     
-    public void stop();
+    public void interrupt();
     
     public Step getCurrentStep();
     
@@ -21,4 +21,6 @@ public interface Flow {
     public void setName(String name);
     
     public String getName();
+    
+    public void reset();
 }

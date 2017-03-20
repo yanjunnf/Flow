@@ -1,7 +1,6 @@
 package com.flow.step;
 
-import org.apache.log4j.Logger;
-import com.flow.common.Status;
+import java.util.logging.Logger;
 import com.flow.recipe.Flow;
 
 /*
@@ -16,19 +15,17 @@ import com.flow.recipe.Flow;
 public abstract class AbstractStep implements Step {
     private String name;
     private Flow flow;
-    private Status status;
     private Object inputData;
-    protected Logger logger = Logger.getLogger(AbstractStep.class);
+    protected Logger logger = Logger.getLogger(AbstractStep.class.toString());
     
     public AbstractStep(String name, Flow flow) {
         this.name = name;
         this.flow = flow;
-        status = Status.READY;
         inputData = null;
     }
     
     @Override
-    public Object execute(Object inputData) {
+    public Object execute(Object inputData) throws Exception {
         this.inputData = inputData;
         return null;
     }
@@ -48,26 +45,12 @@ public abstract class AbstractStep implements Step {
         this.name = name;
     }
 
-
-
     public Flow getFlow() {
         return flow;
     }
 
     public void setFlow(Flow flow) {
         this.flow = flow;
-    }
-
-    public Status getStatus() {
-        synchronized(this) {
-            return status;
-        }
-    }
-
-    public void setStatus(Status status) {
-        synchronized(this) {
-            this.status = status;
-        }
     }
 
     public Object getInputData() {
@@ -79,13 +62,11 @@ public abstract class AbstractStep implements Step {
     }
     
     @Override
-    public void stop() {
-        logger.info("This step stopped.");
-        setStatus(Status.STOPPED);
+    public void interrupt() {
+        logger.info("This step interrupted.");
     }
     
     @Override
     public void reset() {
-    	status = Status.READY;
     }
 }

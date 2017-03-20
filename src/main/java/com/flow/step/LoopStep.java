@@ -1,7 +1,6 @@
 package com.flow.step;
 
 import com.flow.action.Action;
-import com.flow.common.Status;
 import com.flow.recipe.Flow;
 /*
  * The LoopStep just like JAVA while syntax.
@@ -20,17 +19,12 @@ public class LoopStep extends ActionStep {
     }
 
     @Override
-    public Object execute(Object inputData) {
-        if (getStatus() != Status.READY) {
-        	logger.warn("The action status is not READY. Status = " + getStatus());
-            return null;
-        }
-
+    public Object execute(Object inputData) throws Exception {
         Object result = null;
         result = super.execute(inputData);
         if (times == -1) {
             try {
-                while (getStatus() == Status.READY) {
+                while (true) {
                     result = getAction().execute();
                     Thread.sleep(interval);
                 }
@@ -39,7 +33,7 @@ public class LoopStep extends ActionStep {
             }
         } else if (times > 0) {
             try {
-                while (times-- > 0 && getStatus() == Status.READY) {
+                while (times-- > 0) {
                     result = getAction().execute();
                     Thread.sleep(interval);
                 }

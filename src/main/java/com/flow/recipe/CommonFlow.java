@@ -1,7 +1,6 @@
 package com.flow.recipe;
 
-import org.apache.log4j.Logger;
-
+import java.util.logging.Logger;
 import com.flow.common.Status;
 import com.flow.step.Step;
 
@@ -14,7 +13,7 @@ public class CommonFlow implements Flow {
     private Step root;
     private Step currentStep;
     private Status status;
-    protected Logger logger = Logger.getLogger(CommonFlow.class);
+    protected Logger logger = Logger.getLogger(CommonFlow.class.toString());
     
     public CommonFlow(String name, Step root) {
         this.name = name;
@@ -32,12 +31,13 @@ public class CommonFlow implements Flow {
 	}
     
     @Override
-    public void stop() {
+    public void interrupt() {
     	synchronized(this){
     		Step step = getCurrentStep();
             if (step != null) {
-            	step.stop();
-            	setStatus(Status.STOPPED);
+            	setStatus(Status.INTERRUPTING);
+            	step.interrupt();
+            	setStatus(Status.INTERRUPTED);
             }
     	}
     }
@@ -48,7 +48,7 @@ public class CommonFlow implements Flow {
     	try {
     		synchronized(this) {
     			if (status == Status.RUNNING) {
-    				currentStep.stop();
+    				currentStep.interrupt();
     				logger.info("Stop the flow");
     			}
     			currentStep = root;
@@ -101,18 +101,31 @@ public class CommonFlow implements Flow {
             else
                 setStatus(Status.INITIALIZED);
         } else
-        	logger.warn("The flow is running, cannot change root step");
+        	logger.warning("The flow is running, cannot change root step");
     }
     
     @Override
     public void start() {
         Status status = getStatus();
-        if (status == Status.READY || status == Status.STOPPED) {
+        if (status == Status.READY || status == Status.COMPLETED) {
             Step start = getRoot();
             if (start != null) {
                 setStatus(Status.RUNNING);
-                start.execute(null);
+                try {
+                	start.execute(null);
+                	setStatus(Status.COMPLETED);
+                	logger.severe("Finished to run flow, name=" + name);
+                } catch (Exception e) {
+                	logger.severe("Failed to run flow, name=" + name + ". Exception=" + e.getMessage());
+                	setStatus(Status.FAILED);
+                }
             }
         }
     }
+
+	@Override
+	public void reset() {
+		logger.info("Rest flow. name=" + name);
+		status = Status.READY;
+	}
 }

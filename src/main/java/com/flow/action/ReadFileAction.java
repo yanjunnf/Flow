@@ -4,13 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 public class ReadFileAction extends AbstractAction {
     private String fileName;
     private String charset;
-    private Logger logger = Logger.getLogger(ReadFileAction.class);
+    private Logger logger = Logger.getLogger(ReadFileAction.class.toString());
     
     public ReadFileAction(String name, boolean asyncAction) {
         super(name, asyncAction);
@@ -33,7 +32,7 @@ public class ReadFileAction extends AbstractAction {
     }
 
     @Override
-    public Object execute() {
+    public Object execute() throws Exception{
         String result = null;
         if (fileName != null && !fileName.isEmpty()) {
             File file = new File(fileName);
@@ -41,15 +40,15 @@ public class ReadFileAction extends AbstractAction {
                 if (file.isFile()) {
                     result = readFile();
                 } else
-                    logger.error("The file name is not file. File name = " + fileName);
+                    logger.severe("The file name is not file. File name = " + fileName);
             } else
-                logger.error("The file name is invalid. File name = " + fileName);
+                logger.severe("The file name is invalid. File name = " + fileName);
         } else
-            logger.error("The file name is empty.");
+            logger.severe("The file name is empty.");
         return result;
     }
     
-    private String readFile() {
+    private String readFile() throws Exception{
         FileInputStream inputStream = null;
         InputStreamReader reader = null;
         BufferedReader buff = null;
@@ -71,7 +70,8 @@ public class ReadFileAction extends AbstractAction {
             inputStream = null;
             logger.info("Finished to read file. File name=" + fileName);
         } catch (Exception e) {
-            e.printStackTrace();
+        	logger.severe("Failed to execute ReadFileAction. Message=" + e.getMessage());
+            throw e;
         } finally {
             if (buff != null) {
                 try {

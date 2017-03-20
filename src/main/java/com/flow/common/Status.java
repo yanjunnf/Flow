@@ -4,7 +4,9 @@ public enum Status {
     INITIALIZED,
     READY,
     RUNNING,
-    STOPPING,
-    STOPPED,
+    FAILED,
+    INTERRUPTING,
+    INTERRUPTED,
+    COMPLETED,
     UNKNOWN
 }

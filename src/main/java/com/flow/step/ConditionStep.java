@@ -1,8 +1,6 @@
 package com.flow.step;
 
-import org.apache.log4j.Logger;
-
-import com.flow.common.Status;
+import java.util.logging.Logger;
 import com.flow.condition.Condition;
 import com.flow.recipe.Flow;
 
@@ -16,7 +14,7 @@ public class ConditionStep extends AbstractStep {
     private Condition condition;
     private Step leftStep;
     private Step rightStep;
-    private static Logger logger = Logger.getLogger(ConditionStep.class);
+    private static Logger logger = Logger.getLogger(ConditionStep.class.toString());
     
     public ConditionStep(String  name, Flow flow, Condition condition, Step leftStep, Step rightStep) {
         super(name, flow);
@@ -29,27 +27,20 @@ public class ConditionStep extends AbstractStep {
     protected boolean evaluate(Object result) {
         if (condition != null)
             return condition.evaluate(result);
-        logger.warn("The condition is null. Step name=" + getName());
+        logger.warning("The condition is null. Step name=" + getName());
         return false;
     }
 
     @Override
-    public Object execute(Object inputData) {
-        if (getStatus() != Status.READY)
-            return null;
-        
+    public Object execute(Object inputData) throws Exception {
         Object retValue = null;
         if (evaluate(inputData)) {
-            if (getStatus() == Status.READY) {
-                logger.debug("Evaluated the result successfully. Go to left step");
-                retValue = leftStep.execute(inputData);
-            }
+            logger.info("Evaluated the result successfully. Go to left step");
+            retValue = leftStep.execute(inputData);
         }
         else {
-            if (getStatus() == Status.READY) {
-                logger.debug("Failed to evaluate the result. Go to right step");
-                retValue = rightStep.execute(inputData);
-            }
+            logger.info("Failed to evaluate the result. Go to right step");
+            retValue = rightStep.execute(inputData);
         }
         return retValue;
     }
@@ -79,10 +70,10 @@ public class ConditionStep extends AbstractStep {
     }
     
     @Override
-    public void stop() {
-        super.stop();
-        leftStep.stop();
-        rightStep.stop();
+    public void interrupt() {
+        super.interrupt();
+        leftStep.interrupt();
+        rightStep.interrupt();
     }
     
     @Override

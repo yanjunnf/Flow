@@ -2,7 +2,6 @@ package com.flow.step;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.flow.common.Status;
 import com.flow.condition.Condition;
 import com.flow.recipe.Flow;
 
@@ -26,10 +25,7 @@ public class SwitchStep extends AbstractStep {
     }
 
     @Override
-    public Object execute(Object inputData) {
-        if (getStatus() == Status.READY)
-            return null;
-
+    public Object execute(Object inputData) throws Exception {
         Object result = null;
         result = super.execute(inputData);
         if (stepMap.size() > 0) {
@@ -42,15 +38,13 @@ public class SwitchStep extends AbstractStep {
                 }    
             }
         }
-        
         return result;
     }
 
     @Override
-    public void stop() {
-        this.setStatus(Status.STOPPED);
+    public void interrupt() {
         for (Step step: stepMap.values()) {
-            step.stop();
+            step.interrupt();
         }
     }
     
