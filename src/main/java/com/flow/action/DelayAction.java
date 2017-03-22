@@ -2,15 +2,17 @@ package com.flow.action;
 
 import java.util.logging.Logger;
 
+import com.flow.action.file.ReadFileAction;
+
 /*
  * Wait Action is used to delay a specified time.
  * Unit: millisecond
  * */
-public class WaitAction extends AbstractAction{
+public class DelayAction extends AbstractAction {
     private int sleep;
     private Logger logger = Logger.getLogger(ReadFileAction.class.toString());
     
-    public WaitAction(String name, int sleep) {
+    public DelayAction(String name, int sleep) {
         super(name, false);
     }
 

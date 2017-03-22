@@ -21,7 +21,7 @@ import java.util.UUID;
  * */
 public class JobManager {
 	private Map<Future<?>, Job> jobMapper;
-    private Logger logger =Logger.getLogger(JobManager.class.toString());
+    private Logger logger = Logger.getLogger(JobManager.class.toString());
     //Thread pools
     private ExecutorService commonThreadPool;
     private ScheduledExecutorService scheduledThreadPool;

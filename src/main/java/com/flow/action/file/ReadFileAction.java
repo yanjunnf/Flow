@@ -1,10 +1,12 @@
-package com.flow.action;
+package com.flow.action.file;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
+
+import com.flow.action.AbstractAction;
 
 public class ReadFileAction extends AbstractAction {
     private String fileName;

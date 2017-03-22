@@ -4,6 +4,8 @@
     . 写文件action
     . 新建文件
     . 删除文件
+    . 文件/文件夹是否存在
+    . 文件/文件夹拷贝
     . 监听文件action
     . 发送http请求action(GET,PUT,DELETE,POST)
     . 接收http请求action(GET,PUT,DELETE,POST)
@@ -17,6 +19,8 @@
     . gSOAP调用
     . 处理JSON对象action
     . 处理XML对象action
+    . 处理数据库相关aciton(CREATE, UPDATE, DELETE, SQL-RUNNER)
+    . Redis/Memcached交互
     
 上述action，需要定义好输出是什么？
 
@@ -64,6 +68,12 @@
     5. 运行中
     7. 运行结束
     8. 运行失败
+
+条件(Condition):
+    1. 大于/大于等于
+    2. 小于/小于等于
+    3. 包含字符串
+    4. 正则表达式匹配
     
 流管理
     1. 添加流
@@ -72,3 +82,12 @@
     4. 停止流
     5. 重新开始流
     6. 复制流
+    
+作业(Job)管理
+    1. 提交Job
+    2. 停止Job
+    3. 查询Job状态
+    
+作业配置选项：
+    1. 普通job
+    2. 循环job

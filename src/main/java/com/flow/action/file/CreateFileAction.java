@@ -1,7 +1,9 @@
-package com.flow.action;
+package com.flow.action.file;
 
 import java.io.File;
 import java.util.logging.Logger;
+
+import com.flow.action.AbstractAction;
 
 
 public class CreateFileAction extends AbstractAction {

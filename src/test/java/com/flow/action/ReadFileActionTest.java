@@ -8,6 +8,8 @@ import java.io.OutputStreamWriter;
 
 import org.junit.Test;
 
+import com.flow.action.file.ReadFileAction;
+
 public class ReadFileActionTest {
     @Test
     public void testReadFileAction() {
